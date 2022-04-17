@@ -1,38 +1,41 @@
 package ru.netology.data;
 
+import com.github.javafaker.Faker;
+import ru.netology.utilities.UserInfo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
-import com.github.javafaker.Faker;
-
 
 public class DataGenerator {
     private DataGenerator() {
     }
 
+    private static final Faker faker = new Faker(new Locale("ru"));
 
-    static Faker faker = new Faker(new Locale("ru"));
 
-    public static String randomName() {
-        return faker.name().fullName();
-
+    public static String generateDate(int shift) {
+        return LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
-    public static String randomPhoneNumber() {
+
+    public static String generateCity() {
+        return faker.address().cityName();
+    }
+
+
+    public static String generateName() {
+        return faker.name().fullName();
+    }
+
+
+    public static String generatePhone() {
         return faker.number().digits(11);
     }
 
-    public static String randomCity() {
-        return faker.address().city();
-    }
 
-    public static String generateDate() {
-        return LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-    }
-
-    public static String generateAnotherDate() {
-        return LocalDate.now().plusDays(5).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-
+    public static UserInfo generateUser(String locale) {
+        return new UserInfo(generateCity(), generateName(), generatePhone());
     }
 }
+
