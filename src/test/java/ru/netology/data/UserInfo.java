@@ -1,4 +1,4 @@
-package ru.netology.utilities;
+package ru.netology.data;
 
 public class UserInfo {
     String name;
